@@ -10,6 +10,7 @@ if ('1' === ($_POST['submit'] ?? false)) {
     if (!empty($_POST['data'])) {
         $lines = explode("\n", $_POST['data']);
         foreach ($lines as $line) {
+            $line = str_replace("\r", "", $line);
             if (str_contains($line, "\t") && !empty($infos = explode("\t", $line)) && 1 < \count($infos)) {
                 $line = $infos[0] . ' ' . $infos[1];
             }
