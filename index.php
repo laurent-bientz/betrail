@@ -14,6 +14,9 @@ if ('1' === ($_POST['submit'] ?? false)) {
             if (str_contains($line, "\t") && !empty($infos = explode("\t", $line)) && 1 < \count($infos)) {
                 $line = $infos[0] . ' ' . $infos[1];
             }
+            if (empty($line)) {
+                continue;
+            }
             try {
                 $response = $client->request('GET', sprintf('https://www.betrail.run/api/runner/search?queryString=%s', $line));
                 $runner = $response->toArray()['body'][0]['close_runners'][0]['_source'] ?? null;
